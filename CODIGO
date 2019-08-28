@@ -1,3 +1,9 @@
+public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            String sqlCode= "DROP TABLE IF EXISTS "+TABLE_NAME+";" ;
+            sqLiteDatabase.execSQL(sqlCode);
+            onCreate(sqLiteDatabase);
+        }
+
 String sqlCode= "CREATE TABLE "+TABLE_NAME+"( "+KEY_FILA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                         KEY_FILA_NAME+" TEXT NOT NULL, "+KEY_FILA_EMAIL+" TEXT NOT NULL );";
         sqLiteDatabase.execSQL(sqlCode);
