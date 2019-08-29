@@ -1,3 +1,10 @@
+private void showMessage(String message){
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0 );
+        toast.show();
+    }
+
+
 public long deleteEntry(String rowID){
         return ourDatabase.delete(TABLE_NAME, KEY_FILA_ID + "=?",
                 new String[]{rowID} );
