@@ -1,3 +1,16 @@
+public void btnDelete(View v){
+        try{
+            DBContactos db =new DBContactos(this);
+            db.open();
+            db.deleteEntry(db.getFirstRecord());
+            db.close();
+            showMessage("Información eliminada con éxito");
+        }
+        catch (Exception e){
+            showMessage("Error al eliminar información de la tabla: "+ e.getMessage());
+        }
+    }
+
 public void btnEdit(View v){
         try{
             DBContactos db =new DBContactos(this);
