@@ -1,3 +1,17 @@
+public long deleteEntry(String rowID){
+        return ourDatabase.delete(TABLE_NAME, KEY_FILA_ID + "=?",
+                new String[]{rowID} );
+    }
+
+    public long updateEntry(String rowID, String name, String email){
+        ContentValues cv=new ContentValues();
+        cv.put(KEY_FILA_NAME,name);
+        cv.put(KEY_FILA_EMAIL,email);
+        return ourDatabase.update(TABLE_NAME, cv,KEY_FILA_ID + "=?",
+                new String[]{rowID} );
+    }
+
+
 public String[] getData(){
 
         String[] columnas= new String[]{KEY_FILA_ID,KEY_FILA_NAME,KEY_FILA_EMAIL};
