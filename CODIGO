@@ -1,3 +1,25 @@
+public String[] getData(){
+
+        String[] columnas= new String[]{KEY_FILA_ID,KEY_FILA_NAME,KEY_FILA_EMAIL};
+
+        Cursor c =ourDatabase.query(TABLE_NAME,columnas,null,
+                null,null,null,null);
+
+        String[] resultado=new String[c.getCount()];
+
+        int iColId=c.getColumnIndex(KEY_FILA_ID);
+        int iColName=c.getColumnIndex(KEY_FILA_NAME);
+        int iColEmail = c.getColumnIndex(KEY_FILA_EMAIL);
+        int i=0;
+        for (c.moveToFirst();!c.isAfterLast(); c.moveToNext()){
+            resultado[i]="ID: "+ c.getString(iColId) + " : "+
+                      c.getString(iColName)+" - "+c.getString(iColEmail);
+            i++;
+        }
+        return resultado;
+    }
+
+
 public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
             String sqlCode= "DROP TABLE IF EXISTS "+TABLE_NAME+";" ;
             sqLiteDatabase.execSQL(sqlCode);
