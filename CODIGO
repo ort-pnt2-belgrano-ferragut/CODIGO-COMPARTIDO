@@ -1,3 +1,18 @@
+public void btnEdit(View v){
+        try{
+            DBContactos db =new DBContactos(this);
+            db.open();
+            db.updateEntry(db.getFirstRecord(),"Juan Perez","a@b.com");
+            db.close();
+            showMessage("Información actualizada con éxito");
+        }
+        catch (Exception e){
+            showMessage("Error al actualizar información en la tabla: "+ e.getMessage());
+        }
+    }
+
+
+
 private void showMessage(String message){
         Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER,0,0 );
