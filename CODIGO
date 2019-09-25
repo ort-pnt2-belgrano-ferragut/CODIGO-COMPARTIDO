@@ -7,7 +7,7 @@
 <!-- Aquí va el código Javascript-->
 <script>
     props: {
-        mensaje: String
+        mensaje: 'Esta es una galería de componentes'
     }
 </script>
 <!-- Aquí va el código CSS-->
