@@ -1,140 +1,16 @@
-public String getFirstRecord() throws Exception{
-        String[] columnas= new String[]{KEY_FILA_ID};
-        Cursor c =ourDatabase.query(TABLE_NAME,columnas,null,
-                null,null,null,null);
-        int iColId=c.getColumnIndex(KEY_FILA_ID);
-        if (c.moveToFirst()){
-            return c.getString(iColId);
-        }
-        throw new Exception("Problema para obtener el primer registro de la tabla");
+<!-- Aquí va el código HTML-->
+<template>
+ <div class="galeria">
+     <h1>{{mensaje}}<h1>
+ </div>
+</template>
+<!-- Aquí va el código Javascript-->
+<script>
+    props: {
+        mensaje: String
     }
+</script>
+<!-- Aquí va el código CSS-->
+<style scoped>
 
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class Adaptador extends BaseAdapter {
-    Context context;
-    ArrayList<String> items;
-    public Adaptador(Context c, String[] is){
-        this.context=c;
-        this.items=new ArrayList(Arrays.asList(is));
-    }
-
-
-    @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return items.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        view= LayoutInflater.from(context).inflate(R.layout.item_lista,null);
-        TextView elemento= view.findViewById(R.id.elemento);
-        String item = (String) getItem(i);
-        elemento.setText(item);
-        return view;
-    }
-}
-
-
-
-public void btnDelete(View v){
-        try{
-            DBContactos db =new DBContactos(this);
-            db.open();
-            db.deleteEntry(db.getFirstRecord());
-            db.close();
-            showMessage("Información eliminada con éxito");
-        }
-        catch (Exception e){
-            showMessage("Error al eliminar información de la tabla: "+ e.getMessage());
-        }
-    }
-
-public void btnEdit(View v){
-        try{
-            DBContactos db =new DBContactos(this);
-            db.open();
-            db.updateEntry(db.getFirstRecord(),"Juan Perez","a@b.com");
-            db.close();
-            showMessage("Información actualizada con éxito");
-        }
-        catch (Exception e){
-            showMessage("Error al actualizar información en la tabla: "+ e.getMessage());
-        }
-    }
-
-
-
-private void showMessage(String message){
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER,0,0 );
-        toast.show();
-    }
-
-
-public long deleteEntry(String rowID){
-        return ourDatabase.delete(TABLE_NAME, KEY_FILA_ID + "=?",
-                new String[]{rowID} );
-    }
-
-    public long updateEntry(String rowID, String name, String email){
-        ContentValues cv=new ContentValues();
-        cv.put(KEY_FILA_NAME,name);
-        cv.put(KEY_FILA_EMAIL,email);
-        return ourDatabase.update(TABLE_NAME, cv,KEY_FILA_ID + "=?",
-                new String[]{rowID} );
-    }
-
-
-public String[] getData(){
-
-        String[] columnas= new String[]{KEY_FILA_ID,KEY_FILA_NAME,KEY_FILA_EMAIL};
-
-        Cursor c =ourDatabase.query(TABLE_NAME,columnas,null,
-                null,null,null,null);
-
-        String[] resultado=new String[c.getCount()];
-
-        int iColId=c.getColumnIndex(KEY_FILA_ID);
-        int iColName=c.getColumnIndex(KEY_FILA_NAME);
-        int iColEmail = c.getColumnIndex(KEY_FILA_EMAIL);
-        int i=0;
-        for (c.moveToFirst();!c.isAfterLast(); c.moveToNext()){
-            resultado[i]="ID: "+ c.getString(iColId) + " : "+
-                      c.getString(iColName)+" - "+c.getString(iColEmail);
-            i++;
-        }
-        return resultado;
-    }
-
-
-public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-            String sqlCode= "DROP TABLE IF EXISTS "+TABLE_NAME+";" ;
-            sqLiteDatabase.execSQL(sqlCode);
-            onCreate(sqLiteDatabase);
-        }
-
-String sqlCode= "CREATE TABLE "+TABLE_NAME+"( "+KEY_FILA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                        KEY_FILA_NAME+" TEXT NOT NULL, "+KEY_FILA_EMAIL+" TEXT NOT NULL );";
-        sqLiteDatabase.execSQL(sqlCode);
-
+</style>
